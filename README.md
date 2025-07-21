@@ -6,7 +6,7 @@ A modern, interactive 3D portfolio website showcasing full-stack development ski
 
 ## 🚀 Live Demo
 
-**[View Live Portfolio →](https://your-portfolio-url.com)**
+**[View Live Portfolio →](https://portfolio-final-nine-sigma.vercel.app/)**
 
 ## ✨ Features
 
