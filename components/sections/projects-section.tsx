@@ -11,7 +11,7 @@ import { ExternalLink, Github } from "lucide-react"
 const projects = [
   {
     title: "PhishNet - Phishing Detection browser extension",
-    description: "PhishNet is a real-time phishing URL detector that combines a trained ML model with a backend API and browser extension to seamlessly identify malicious links as users browse.",
+    description: "PhishNet is a real-time phishing URL detector that has a trained Ensemble ML model with a backend API and browser extension to seamlessly identify malicious links as users browse.",
     image: "/phishing.png",
     tags: ["Python", "Scikit-learn", "Pandas", "FASTAPI", "Chromium based browser"],
     github: "https://github.com/Bucke200/PhishNet",
