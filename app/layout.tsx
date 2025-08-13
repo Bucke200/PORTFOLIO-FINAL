@@ -3,9 +3,9 @@ import "@/app/globals.css"
 import { ThemeProvider } from "@/components/theme-provider"
 
 export const metadata = {
-  title: "3D Developer Portfolio",
-  description: "Interactive 3D portfolio showcasing developer skills and projects",
-    generator: 'v0.dev'
+  title: "Srinjay Panja",
+  description: "Srinjay Panja's portfolio - Full Stack Developer specializing in MERN stack, Java, Python, ML/AI, and competitive programming. Open source contributor and mentor.",
+  generator: 'v0.dev'
 }
 
 export default function RootLayout({
@@ -23,6 +23,3 @@ export default function RootLayout({
     </html>
   )
 }
-
-
-import './globals.css'
