@@ -1,12 +1,15 @@
-"use client"
+"use client";
 
-import { motion } from "framer-motion"
-import { Button } from "@/components/ui/button"
-import { ArrowDown, ExternalLink, Github, Code } from "lucide-react"
+import { motion } from "framer-motion";
+import { Button } from "@/components/ui/button";
+import { ArrowDown, ExternalLink, Github, Code } from "lucide-react";
 
 export default function IntroSection() {
   return (
-    <section id="intro" className="min-h-screen flex flex-col justify-center relative overflow-hidden">
+    <section
+      id="intro"
+      className="min-h-screen flex flex-col justify-center relative overflow-hidden"
+    >
       {/* Decorative elements */}
       <div className="absolute inset-0 -z-10">
         <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
@@ -18,7 +21,8 @@ export default function IntroSection() {
         <div
           className="absolute inset-0"
           style={{
-            backgroundImage: "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
+            backgroundImage:
+              "radial-gradient(circle at 1px 1px, currentColor 1px, transparent 0)",
             backgroundSize: "40px 40px",
           }}
         />
@@ -39,7 +43,7 @@ export default function IntroSection() {
               transition={{ delay: 0.2, duration: 0.5 }}
             >
               <span className="inline-block px-3 py-1 text-sm font-medium bg-primary/10 text-primary rounded-full">
-              Software Engineer
+                Software Engineer
               </span>
             </motion.div>
 
@@ -51,7 +55,7 @@ export default function IntroSection() {
             >
               Brewing{" "}
               <span className="bg-clip-text text-transparent bg-gradient-to-r from-primary to-violet-500 dark:from-blue-400 dark:to-violet-400">
-              Code into
+                Code into
               </span>{" "}
               Digital Magic
             </motion.h1>
@@ -62,7 +66,9 @@ export default function IntroSection() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4, duration: 0.8 }}
             >
-              Full-stack wizardry, backend mastery, AI/ML intuition, and pixel-perfect frontend finesse — I blend tech expertise with real-world impact
+              Full-stack wizardry, backend mastery, AI/ML intuition, and
+              pixel-perfect frontend finesse — I blend tech expertise with
+              real-world impact
             </motion.p>
           </div>
 
@@ -88,7 +94,9 @@ export default function IntroSection() {
               <span className="text-3xl font-bold text-foreground bg-clip-text text-transparent bg-gradient-to-r from-primary to-violet-500">
                 100%
               </span>
-              <span className="text-sm text-foreground/70">Blood, Sweat & Tears</span>
+              <span className="text-sm text-foreground/70">
+                Blood, Sweat & Tears
+              </span>
             </div>
           </motion.div>
         </motion.div>
@@ -114,5 +122,5 @@ export default function IntroSection() {
         </a>
       </motion.div>
     </section>
-  )
+  );
 }

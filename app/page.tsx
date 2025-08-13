@@ -7,6 +7,7 @@ import ModernNavbar from "@/components/modern-navbar"
 import IntroSection from "@/components/sections/intro-section"
 import ProjectsSection from "@/components/sections/projects-section"
 import AboutSection from "@/components/sections/about-section"
+import ExperienceSection from "@/components/sections/experience-section"
 import ContactSection from "@/components/sections/contact-section"
 
 export default function Home() {
@@ -31,6 +32,7 @@ export default function Home() {
         <IntroSection />
         <ProjectsSection />
         <AboutSection />
+        <ExperienceSection />
         <ContactSection />
       </div>
     </main>

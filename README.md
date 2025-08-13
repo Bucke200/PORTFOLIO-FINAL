@@ -2,75 +2,45 @@
 
 A modern, interactive 3D portfolio website showcasing full-stack development skills with stunning animations and professional design.
 
-![Portfolio Preview](https://img.shields.io/badge/Status-Live-brightgreen) ![Next.js](https://img.shields.io/badge/Next.js-15.2.4-black) ![React](https://img.shields.io/badge/React-19-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Three.js](https://img.shields.io/badge/Three.js-Latest-orange)
-
-## 🚀 Live Demo
-
-**[View Live Portfolio →](https://your-portfolio-url.com)**
+![Portfolio Preview](https://img.shields.io/badge/Status-Live-brightgreen) ![Next.js](https://img.shields.io/badge/Next.js-15.2.4-black) ![React](https://img.shields.io/badge/React-19-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Three.js](https://img.shields.io/badge/Three.js-0.175.0-orange)
 
 ## ✨ Features
 
 ### 🎨 **Interactive 3D Experience**
-- Dynamic 3D shapes that transform based on scroll position (sphere → cube → pyramid)
+- Dynamic 3D shapes that transform based on scroll position
 - Adaptive particle system (50-300 particles based on device capability)
 - Smooth animations with reduced motion support
-- Theme-responsive materials and lighting
+- Professional dark theme with glassmorphism effects
 
-### 🛡️ **Enterprise-Grade Security**
+### 🛡️ **Security First**
 - Comprehensive input validation and sanitization
 - Rate limiting (5 requests per 15 minutes)
-- Security headers (CSP, XSS protection, CSRF prevention)
-- Secure error handling without information leakage
+- Security headers (CSP, XSS protection, clickjacking prevention)
 - **Security Score: 9.4/10**
 
-### 📧 **Functional Contact Form**
-- Gmail SMTP integration with app passwords
-- Real-time form validation
-- Professional email templates
-- Spam protection and rate limiting
-
-### 🎭 **Modern UI/UX**
-- Glassmorphism design elements
-- Smooth scroll-triggered animations
+### 📱 **Modern UI/UX**
 - Responsive design for all devices
-- Professional dark theme
-- Animated buttons with hover effects
+- Smooth scroll-triggered animations
+- Modern animated buttons with hover effects
+- Functional contact form with Gmail SMTP
 
-### ⚡ **Performance Optimized**
-- Smart particle count based on device capabilities
-- Lazy loading and code splitting
-- Optimized 3D rendering
-- 60fps smooth animations
+## �️ Tecph Stack
 
-## 🛠️ Tech Stack
-
-### **Frontend**
 - **Next.js 15** - React framework with App Router
-- **React 19** - Latest React with TypeScript
-- **Three.js & React Three Fiber** - 3D graphics and animations
-- **Framer Motion** - Smooth animations and transitions
+- **React 19** - UI library with latest features
+- **TypeScript** - Type-safe development
+- **Three.js & React Three Fiber** - 3D graphics
 - **Tailwind CSS** - Utility-first styling
-- **Radix UI** - Accessible component primitives
+- **Framer Motion** - Smooth animations
+- **Radix UI** - Accessible components
 
-### **Backend**
-- **Next.js API Routes** - Serverless functions
-- **Nodemailer** - Email functionality
-- **Gmail SMTP** - Email service integration
+## 🚀 Getting Started
 
-### **Security & Performance**
-- **Input Validation** - Comprehensive sanitization
-- **Rate Limiting** - Abuse prevention
-- **Security Headers** - XSS, CSRF, clickjacking protection
-- **Adaptive Rendering** - Device-based optimization
-
-## 🚀 Quick Start
-
-### **Prerequisites**
-- Node.js 18+ 
-- npm or pnpm
+### Prerequisites
+- Node.js 18+
 - Gmail account with app password
 
-### **Installation**
+### Installation
 
 1. **Clone the repository**
    ```bash
@@ -81,8 +51,6 @@ A modern, interactive 3D portfolio website showcasing full-stack development ski
 2. **Install dependencies**
    ```bash
    npm install
-   # or
-   pnpm install
    ```
 
 3. **Set up environment variables**
@@ -90,171 +58,89 @@ A modern, interactive 3D portfolio website showcasing full-stack development ski
    cp .env.example .env.local
    ```
    
-   Fill in your Gmail SMTP credentials:
-   ```env
-   SMTP_HOST=smtp.gmail.com
-   SMTP_PORT=587
-   SMTP_USER=your-email@gmail.com
-   SMTP_PASS=your-app-password
-   EMAIL_FROM=your-email@gmail.com
-   EMAIL_TO=your-email@gmail.com
-   ```
+   Fill in your Gmail SMTP credentials in `.env.local`
 
 4. **Run the development server**
    ```bash
    npm run dev
-   # or
-   pnpm dev
    ```
 
 5. **Open [http://localhost:3000](http://localhost:3000)**
 
-## 📁 Project Structure
+## � Project Structure
 
 ```
-├── app/                    # Next.js App Router
-│   ├── api/contact/       # Contact form API endpoint
-│   ├── globals.css        # Global styles
-│   ├── layout.tsx         # Root layout
+├── app/                    # Next.js app directory
+│   ├── api/contact/       # Contact form API
 │   └── page.tsx           # Main page
 ├── components/
-│   ├── sections/          # Page sections (intro, projects, about, contact)
-│   ├── ui/               # Reusable UI components
-│   ├── scene.tsx         # 3D scene component
-│   └── modern-navbar.tsx # Navigation component
-├── lib/
-│   ├── security.ts       # Security utilities
-│   └── utils.ts          # General utilities
+│   ├── sections/          # Page sections
+│   ├── ui/               # Reusable components
+│   └── scene.tsx         # 3D scene
+├── lib/                  # Utilities
 ├── public/               # Static assets
-│   └── Srinjay_Panja_Resume.pdf
-├── scripts/
-│   └── security-test.js  # Security testing script
-└── middleware.ts         # Security headers middleware
+└── middleware.ts         # Security middleware
 ```
 
-## 🔧 Configuration
+## 🔧 Available Scripts
 
-### **Gmail SMTP Setup**
-1. Enable 2-Step Verification in your Google Account
-2. Generate an App Password:
-   - Google Account → Security → App passwords
-   - Select "Mail" and generate password
-3. Use the generated password in `.env.local`
-
-### **Security Testing**
 ```bash
+npm run dev              # Start development server
+npm run build            # Build for production
+npm run start            # Start production server
 npm run security-test    # Run security tests
-npm run security-audit   # Check for vulnerabilities
+npm run security-audit   # Check vulnerabilities
 ```
-
-## 🎨 Customization
-
-### **Personal Information**
-Update your details in:
-- `components/sections/intro-section.tsx` - Hero section
-- `components/sections/about-section.tsx` - About me content
-- `components/sections/projects-section.tsx` - Featured projects
-- `components/modern-navbar.tsx` - Social links
-
-### **3D Scene**
-Modify particle count and animations in:
-- `components/scene.tsx` - 3D scene configuration
-
-### **Styling**
-- `tailwind.config.ts` - Tailwind configuration
-- `app/globals.css` - Global styles and CSS variables
-
-## 📊 Performance
-
-### **Lighthouse Scores**
-- **Performance**: 95+
-- **Accessibility**: 100
-- **Best Practices**: 100
-- **SEO**: 100
-
-### **3D Rendering Optimization**
-- Adaptive particle count based on device
-- Efficient geometry and materials
-- Reduced motion support
-- GPU-accelerated rendering
 
 ## 🛡️ Security Features
 
-### **Input Security**
-- Email format validation
-- Input length limits
-- HTML/XSS sanitization
-- Required field validation
-
-### **API Security**
-- Rate limiting per IP
-- Request size limits
-- Secure error messages
+- Input validation and sanitization
+- Rate limiting protection
+- Security headers (CSP, XSS protection)
+- Secure error handling
 - CORS configuration
 
-### **Headers Security**
-- Content Security Policy
-- XSS Protection
-- Clickjacking prevention
-- MIME sniffing protection
+## 📊 Performance
 
-## 🚀 Deployment
+### Adaptive Particle System
+- **Desktop**: 300 particles
+- **Mobile**: 150 particles
+- **Reduced Motion**: 50 particles
 
-### **Vercel (Recommended)**
-1. Connect your GitHub repository to Vercel
-2. Add environment variables in Vercel dashboard
-3. Deploy automatically on push
+### Optimizations
+- Code splitting and lazy loading
+- Optimized 3D rendering
+- Responsive design
+- 60fps animations
 
-### **Other Platforms**
-- **Netlify**: Works with static export
-- **Railway**: Full-stack deployment
-- **DigitalOcean**: VPS deployment
+## � Deployment
 
-## 📈 Analytics & Monitoring
+### Vercel (Recommended)
+1. Connect GitHub repository to Vercel
+2. Add environment variables
+3. Deploy automatically
 
-### **Recommended Tools**
-- **Vercel Analytics** - Performance monitoring
-- **Google Analytics** - User analytics
-- **Sentry** - Error tracking
-- **Uptime Robot** - Uptime monitoring
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👨‍💻 About Me
+## 👨‍💻 About
 
 **Srinjay Panja** - Full Stack Developer
 
-- 🌍 Based in Bengaluru, India
-- 💼 Available for freelance projects and full-time positions
-- 🎯 Passionate about creating innovative digital experiences
-
-### **Connect With Me**
-- 📧 Email: [srinjaypanja200@gmail.com](mailto:srinjaypanja200@gmail.com)
 - 💼 LinkedIn: [linkedin.com/in/srinjaypanja](https://www.linkedin.com/in/srinjaypanja)
 - 🐙 GitHub: [github.com/Bucke200](https://github.com/Bucke200)
-- 🏆 Codeforces: [codeforces.com/profile/CyntaxError](https://codeforces.com/profile/CyntaxError)
-- 💻 LeetCode: [leetcode.com/u/ashborn200](https://leetcode.com/u/ashborn200/)
+- 📧 Email: srinjaypanja200@gmail.com
 
-## 🙏 Acknowledgments
+### Skills Showcased
+- Full-stack development (MERN, Spring, Django)
+- 3D graphics and animations
+- Security best practices
+- Performance optimization
+- Modern React patterns
 
-- **Three.js** - Amazing 3D library
-- **Framer Motion** - Smooth animations
-- **Radix UI** - Accessible components
-- **Tailwind CSS** - Utility-first styling
-- **Next.js Team** - Excellent React framework
+## 📄 License
+
+MIT License - see LICENSE file for details.
 
 ---
 
 ⭐ **Star this repository if you found it helpful!**
 
-**Built with ❤️ by Srinjay Panja**
+Built with ❤️ by [Srinjay Panja](https://github.com/Bucke200)
