@@ -2,7 +2,11 @@
 
 A modern, interactive 3D portfolio website showcasing full-stack development skills with stunning animations and professional design.
 
-![Portfolio Preview](https://img.shields.io/badge/Status-Live-brightgreen) ![Next.js](https://img.shields.io/badge/Next.js-15.2.4-black) ![React](https://img.shields.io/badge/React-19-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Three.js](https://img.shields.io/badge/Three.js-0.175.0-orange)
+![Portfolio Preview](https://img.shields.io/badge/Status-Live-brightgreen) ![Next.js](https://img.shields.io/badge/Next.js-15.2.4-black) ![React](https://img.shields.io/badge/React-19-blue) ![TypeScript](https://img.shields.io/badge/TypeScript-5-blue) ![Three.js](https://img.shields.io/badge/Three.js-Latest-orange)
+
+## 🚀 Live Demo
+
+**[View Live Portfolio →](https://portfolio-final-nine-sigma.vercel.app/)**
 
 ## ✨ Features
 
@@ -143,4 +147,4 @@ MIT License - see LICENSE file for details.
 
 ⭐ **Star this repository if you found it helpful!**
 
-Built with ❤️ by [Srinjay Panja](https://github.com/Bucke200)
+**Built with ❤️ by Srinjay Panja**
