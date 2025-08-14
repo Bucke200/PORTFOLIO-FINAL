@@ -55,7 +55,7 @@ const experiences = [
     title: "Competitive Programming Achievements",
     company: "Multiple Platforms",
     location: "Global",
-    period: "2021 - Present",
+    period: "2023 - Present",
     description:
       "Achieved high ratings across multiple competitive programming platforms, demonstrating strong problem-solving skills and algorithmic thinking. Consistently ranked among top performers with expertise in data structures, algorithms, and mathematical problem solving.",
     technologies: [
@@ -90,7 +90,7 @@ const experiences = [
     title: "Research Intern",
     company: "1M1B (1 Million for 1 Billion)",
     location: "Remote",
-    period: "2024",
+    period: "July 2025 - September 2025",
     description:
       "Conducted cutting-edge research on machine learning applications for environmental sustainability. Developed and optimized ML models for weather data analysis and energy consumption prediction, contributing to data-driven solutions for climate change mitigation and energy efficiency optimization.",
     technologies: [
@@ -124,7 +124,7 @@ const experiences = [
     title: "Backend Java Intern",
     company: "Shadowfox",
     location: "Remote",
-    period: "2024",
+    period: "April 2025 - May 2025",
     description:
       "Developed and maintained robust banking backend systems using Java and Spring Boot. Implemented secure transaction processing, account management APIs, and database optimization. Worked on critical financial services infrastructure with focus on security, scalability, and performance.",
     technologies: [
