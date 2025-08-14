@@ -28,7 +28,7 @@ A modern, interactive 3D portfolio website showcasing full-stack development ski
 - Modern animated buttons with hover effects
 - Functional contact form with Gmail SMTP
 
-## �️ Tecph Stack
+## �️ Tech Stack
 
 - **Next.js 15** - React framework with App Router
 - **React 19** - UI library with latest features
