@@ -38,30 +38,6 @@ export function middleware(request: NextRequest) {
     requestTimestamps.set(ip, recentTimestamps)
   }
 
-  // --- Security Headers ---
-  // This Content Security Policy is a baseline. For a production site, it would
-  // need to be carefully tuned to be more restrictive (e.g., by using nonces
-  // instead of 'unsafe-inline' and 'unsafe-eval').
-  const csp = [
-    "default-src 'self'",
-    // 'unsafe-eval' may be needed for libraries like Three.js/Framer Motion
-    "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
-    // Inline styles are used by several libraries
-    "style-src 'self' 'unsafe-inline'",
-    "img-src 'self' data:",
-    "font-src 'self'",
-    "connect-src 'self'",
-    "object-src 'none'",
-    "base-uri 'self'",
-    "form-action 'self'",
-    "frame-ancestors 'none'", // Prevents clickjacking (replaces X-Frame-Options)
-  ].join('; ')
-
-  response.headers.set('Content-Security-Policy', csp.replace(/\s{2,}/g, ' ').trim())
-  response.headers.set('X-Content-Type-Options', 'nosniff')
-  response.headers.set('X-Frame-Options', 'DENY') // For older browsers that don't support CSP frame-ancestors
-  response.headers.set('Referrer-Policy', 'strict-origin-when-cross-origin')
-
   return response
 }
 
