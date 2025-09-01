@@ -1,38 +1,99 @@
 "use client"
 
-import { motion } from "framer-motion"
-import { useInView } from "framer-motion"
-import { useRef, useState } from "react"
+import { motion, useInView } from "framer-motion"
+import { useRef } from "react"
+import { useForm } from "react-hook-form"
+import { zodResolver } from "@hookform/resolvers/zod"
+import * as z from "zod"
+
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Github, Linkedin, Mail, Twitter } from "lucide-react"
+import { useToast } from "@/components/ui/use-toast"
+
+// Mirror the backend schema for client-side validation
+const contactFormSchema = z.object({
+  name: z.string().min(2, "Name must be at least 2 characters.").max(100),
+  email: z.string().email("Please enter a valid email address."),
+  subject: z.string().min(2, "Subject must be at least 2 characters.").max(150),
+  message: z.string().min(10, "Message must be at least 10 characters.").max(5000),
+})
+
+type ContactFormValues = z.infer<typeof contactFormSchema>
 
 export default function ContactSection() {
-  const [status, setStatus] = useState<'idle'|'sending'|'success'|'error'>('idle')
-  const [errorMsg, setErrorMsg] = useState<string | null>(null)
+  const { toast } = useToast()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 })
 
+  const form = useForm<ContactFormValues>({
+    resolver: zodResolver(contactFormSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      subject: "",
+      message: "",
+    },
+  })
+
+  const {
+    formState: { isSubmitting },
+    setError,
+  } = form
+
+  const onSubmit = async (data: ContactFormValues) => {
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      })
+
+      const resData = await res.json()
+
+      if (!res.ok) {
+        if (resData.issues) {
+          // Handle validation errors from the server
+          resData.issues.forEach((issue: { path: (string | number)[]; message: string }) => {
+            setError(issue.path[0] as keyof ContactFormValues, {
+              type: "server",
+              message: issue.message,
+            })
+          })
+        } else {
+          toast({
+            variant: "destructive",
+            title: "Uh oh! Something went wrong.",
+            description: resData.error || "There was a problem with your request.",
+          })
+        }
+      } else {
+        toast({
+          title: "Message Sent!",
+          description: "Thank you for reaching out. I'll get back to you soon.",
+        })
+        form.reset()
+      }
+    } catch (error) {
+      toast({
+        variant: "destructive",
+        title: "Uh oh! Something went wrong.",
+        description: "An unexpected error occurred. Please try again.",
+      })
+    }
+  }
+
   const formVariants = {
     hidden: { opacity: 0, y: 20 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6 } },
   }
 
   const socialVariants = {
     hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.3,
-      },
-    },
+    visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.3 } },
   }
 
   const socialItemVariants = {
@@ -41,41 +102,11 @@ export default function ContactSection() {
   }
 
   const socialLinks = [
-    { icon: <Github className="h-5 w-5" />, href: "#", label: "GitHub" },
-    { icon: <Linkedin className="h-5 w-5" />, href: "#", label: "LinkedIn" },
-    { icon: <Twitter className="h-5 w-5" />, href: "#", label: "Twitter" },
-    { icon: <Mail className="h-5 w-5" />, href: "#", label: "Email" },
+    { icon: <Github className="h-5 w-5" />, href: "https://github.com/Bucke200", label: "GitHub" },
+    { icon: <Linkedin className="h-5 w-5" />, href: "https://www.linkedin.com/in/srinjaypanja/", label: "LinkedIn" },
+    { icon: <Twitter className="h-5 w-5" />, href: "https://x.com/srinjay_panja", label: "Twitter" },
+    { icon: <Mail className="h-5 w-5" />, href: "mailto:srinjaypanja200@gmail.com", label: "Email" },
   ]
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault()
-    setStatus('sending')
-    setErrorMsg(null)
-    const form = e.currentTarget
-    const data = new FormData(form)
-    const name = data.get('name')?.toString() || ''
-    const email = data.get('email')?.toString() || ''
-    const subject = data.get('subject')?.toString() || ''
-    const message = data.get('message')?.toString() || ''
-    try {
-      const res = await fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ name, email, subject, message }),
-      })
-      const resData = await res.json()
-      if (!res.ok) {
-        setStatus('error')
-        setErrorMsg(resData.error || 'Something went wrong')
-      } else {
-        setStatus('success')
-        form.reset()
-      }
-    } catch {
-      setStatus('error')
-      setErrorMsg('Something went wrong')
-    }
-  }
 
   return (
     <section id="contact" ref={sectionRef} className="min-h-screen py-20 px-4 relative">
@@ -100,66 +131,67 @@ export default function ContactSection() {
                 <CardDescription>Fill out the form below and I'll get back to you as soon as possible.</CardDescription>
               </CardHeader>
               <CardContent>
-                <form onSubmit={handleSubmit} className="space-y-6">
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div className="space-y-2">
-                      <label htmlFor="name" className="text-sm font-medium">
-                        Name
-                      </label>
-                      <Input 
-                        id="name" 
-                        name="name" 
-                        placeholder="Your name" 
-                        maxLength={100}
-                        required
+                <Form {...form}>
+                  <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <FormField
+                        control={form.control}
+                        name="name"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Name</FormLabel>
+                            <FormControl>
+                              <Input placeholder="Your name" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
+                      />
+                      <FormField
+                        control={form.control}
+                        name="email"
+                        render={({ field }) => (
+                          <FormItem>
+                            <FormLabel>Email</FormLabel>
+                            <FormControl>
+                              <Input type="email" placeholder="Your email" {...field} />
+                            </FormControl>
+                            <FormMessage />
+                          </FormItem>
+                        )}
                       />
                     </div>
-                    <div className="space-y-2">
-                      <label htmlFor="email" className="text-sm font-medium">
-                        Email
-                      </label>
-                      <Input 
-                        id="email" 
-                        name="email" 
-                        type="email" 
-                        placeholder="Your email" 
-                        maxLength={254}
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="subject" className="text-sm font-medium">
-                      Subject
-                    </label>
-                    <Input 
-                      id="subject" 
-                      name="subject" 
-                      placeholder="Subject" 
-                      maxLength={200}
-                      required
+                    <FormField
+                      control={form.control}
+                      name="subject"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Subject</FormLabel>
+                          <FormControl>
+                            <Input placeholder="Subject" {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </div>
-                  <div className="space-y-2">
-                    <label htmlFor="message" className="text-sm font-medium">
-                      Message
-                    </label>
-                    <Textarea 
-                      id="message" 
-                      name="message" 
-                      placeholder="Your message" 
-                      rows={5} 
-                      maxLength={5000}
-                      required
+                    <FormField
+                      control={form.control}
+                      name="message"
+                      render={({ field }) => (
+                        <FormItem>
+                          <FormLabel>Message</FormLabel>
+                          <FormControl>
+                            <Textarea placeholder="Your message" rows={5} {...field} />
+                          </FormControl>
+                          <FormMessage />
+                        </FormItem>
+                      )}
                     />
-                  </div>
-                  {status === 'sending' && <p>Sending message...</p>}
-                  {status === 'success' && <p className="text-green-500">Message sent!</p>}
-                  {status === 'error' && <p className="text-red-500">{errorMsg}</p>}
-                  <Button type="submit" className="w-full" disabled={status === 'sending'}>
-                    Send Message
-                  </Button>
-                </form>
+                    <Button type="submit" className="w-full" disabled={isSubmitting}>
+                      {isSubmitting ? "Sending..." : "Send Message"}
+                    </Button>
+                  </form>
+                </Form>
               </CardContent>
             </Card>
           </motion.div>
@@ -174,12 +206,10 @@ export default function ContactSection() {
               <h3 className="text-2xl font-bold mb-4">Contact Information</h3>
               <div className="space-y-4 text-muted-foreground">
                 <p>
-                  Feel free to reach out if you have any questions or if you're interested in working together on a
-                  project.
+                  Feel free to reach out if you have any questions or if you're interested in working together on a project.
                 </p>
                 <p>
-                  Based in Bengaluru, India, I'm available for freelance projects, full-time positions, and
-                  collaborations.
+                  Based in Bengaluru, India, I'm available for freelance projects, full-time positions, and collaborations.
                 </p>
                 <p className="flex items-center gap-2">
                   <Mail className="h-5 w-5" />
