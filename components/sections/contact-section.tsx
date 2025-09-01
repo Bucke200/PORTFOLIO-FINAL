@@ -5,6 +5,7 @@ import { useRef } from "react"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import * as z from "zod"
+import { toast } from "sonner"
 
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -12,7 +13,6 @@ import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
 import { Github, Linkedin, Mail, Twitter } from "lucide-react"
-import { useToast } from "@/components/ui/use-toast"
 
 // Mirror the backend schema for client-side validation
 const contactFormSchema = z.object({
@@ -25,7 +25,6 @@ const contactFormSchema = z.object({
 type ContactFormValues = z.infer<typeof contactFormSchema>
 
 export default function ContactSection() {
-  const { toast } = useToast()
   const sectionRef = useRef(null)
   const isInView = useInView(sectionRef, { once: false, amount: 0.2 })
 
@@ -63,24 +62,20 @@ export default function ContactSection() {
               message: issue.message,
             })
           })
+          toast.error("Please correct the errors in the form.")
         } else {
-          toast({
-            variant: "destructive",
-            title: "Uh oh! Something went wrong.",
+          toast.error("Uh oh! Something went wrong.", {
             description: resData.error || "There was a problem with your request.",
           })
         }
       } else {
-        toast({
-          title: "Message Sent!",
+        toast.success("Message Sent!", {
           description: "Thank you for reaching out. I'll get back to you soon.",
         })
         form.reset()
       }
     } catch (error) {
-      toast({
-        variant: "destructive",
-        title: "Uh oh! Something went wrong.",
+      toast.error("Uh oh! Something went wrong.", {
         description: "An unexpected error occurred. Please try again.",
       })
     }
